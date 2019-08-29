@@ -12,8 +12,13 @@ variable "source_repo" {
 }
 
 variable "region" {
-    default = "us-east"
+    default = "us-south"
 }
+
+variable "app_host" {
+  
+}
+
 
 variable "org" {}
 variable "space" {}
