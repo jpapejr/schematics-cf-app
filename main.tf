@@ -16,13 +16,7 @@ resource "ibm_app_route" "route" {
 resource "null_resource" "git_clone" {
 
     provisioner "local-exec" {
-        command = <<EOT
-        su - \
-        && apt update &&  apt install -y zip git \
-        && git clone ${var.source_repo} ./source \
-        && cd ./source \
-        && zip -r app.zip *
-        EOT
+        command ="wget ${var.app_zip_url} -O ./app.zip "
     }
 
 }
@@ -33,6 +27,6 @@ resource "ibm_app" "app" {
     space_guid      = "${data.ibm_space.space.id}"
     route_guid      = ["${ibm_app_route.route.id}"]
     memory          = "${var.memory}"
-    app_path        = "./source/app.zip"
+    app_path        = "./app.zip"
     depends_on      = ["null_resource.git_clone", "ibm_app_route.route"]
 }

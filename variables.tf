@@ -7,7 +7,7 @@ variable "memory" {
   default = "128"
 }
 
-variable "source_repo" {
+variable "app_zip_url" {
   description = "Source code to clone and deploy into CF"
 }
 
