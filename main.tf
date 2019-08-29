@@ -17,8 +17,9 @@ resource "null_resource" "git_clone" {
 
     provisioner "local-exec" {
         command = <<EOT
-        sudo apt update && sudo apt install -y zip git
-        git clone ${var.source_repo} ./source \
+        su - \
+        && apt update &&  apt install -y zip git \
+        && git clone ${var.source_repo} ./source \
         && cd ./source \
         && zip -r app.zip *
         EOT
